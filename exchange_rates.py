@@ -24,12 +24,12 @@ class ExchangeRates:
         """Read the CSV, find the USD column, and store the last row."""
         with open(self.csv_path, newline="", encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)
-            rows = [r for r in reader if any(r.values())] 
+            rows = [r for r in reader if any(r.values())] # Skip empty rows if any
             if not rows:
                 raise ValueError("CSV appears empty or invalid.")
-            self.latest_row = rows[-1] 
+            self.latest_row = rows[-1] # Store the most recent row
 
-
+# Identify the USD column automatically 
             for col in reader.fieldnames:
                 if not col:
                     continue
@@ -50,7 +50,7 @@ class ExchangeRates:
         val = self.latest_row[self.usd_col].strip()
         if not val:
             raise ValueError("USD rate missing in latest row.")
-        return float(val.replace(",", ""))  
+        return float(val.replace(",", ""))  # remove commas just in case
 
     def convert(self, amount: float, from_currency: str, to_currency: str) -> float:
         """
@@ -89,7 +89,7 @@ def prompt_and_run():
     print("-----------------------------")
 
 
-
+# Run if executed directly
 if __name__ == "__main__":
     prompt_and_run()
 

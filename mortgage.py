@@ -13,6 +13,7 @@ class MortgagePayment:
     """
 
     def __init__(self, quoted_rate_percent: float, amortization_years: int):
+        #convert percentage to decimal
         self.r_nom = quoted_rate_percent / 100.0
         self.amort_years = amortization_years
 
