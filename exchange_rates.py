@@ -1,14 +1,5 @@
-# exchange_rates.py
-# ---------------------------------------------
 # FINE3300 - Assignment 1, Part 2
-# Question: Exchange Rates
-# ---------------------------------------------
-# Author: <Your Name>
-# GitHub Repo: https://github.com/<your-username>/FINE3300-2025-A1
-#
-# Reads a Bank of Canada CSV file and retrieves the most recent
-# USD/CAD exchange rate (last row).  Converts between USD and CAD.
-# ---------------------------------------------
+# Exchange Rates
 
 import csv
 from typing import Optional
@@ -28,17 +19,17 @@ class ExchangeRates:
         self.latest_row: Optional[dict] = None
         self._load_csv()
 
-    # --------------------------------------------------------------
+
     def _load_csv(self):
         """Read the CSV, find the USD column, and store the last row."""
         with open(self.csv_path, newline="", encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)
-            rows = [r for r in reader if any(r.values())]  # remove blank rows
+            rows = [r for r in reader if any(r.values())] 
             if not rows:
                 raise ValueError("CSV appears empty or invalid.")
-            self.latest_row = rows[-1]  # last (most recent) row
+            self.latest_row = rows[-1] 
 
-            # Find the USD-related column automatically
+
             for col in reader.fieldnames:
                 if not col:
                     continue
@@ -51,8 +42,7 @@ class ExchangeRates:
                     "Could not locate a USD column. "
                     "Please open the CSV and update the code with the exact header name."
                 )
-
-    # --------------------------------------------------------------
+            
     def get_latest_usd_to_cad(self) -> float:
         """Return the most recent USD→CAD exchange rate."""
         if not self.usd_col or not self.latest_row:
@@ -60,7 +50,7 @@ class ExchangeRates:
         val = self.latest_row[self.usd_col].strip()
         if not val:
             raise ValueError("USD rate missing in latest row.")
-        return float(val.replace(",", ""))  # remove commas just in case
+        return float(val.replace(",", ""))  
 
     def convert(self, amount: float, from_currency: str, to_currency: str) -> float:
         """
@@ -99,7 +89,7 @@ def prompt_and_run():
     print("-----------------------------")
 
 
-# Run if executed directly
+
 if __name__ == "__main__":
     prompt_and_run()
 

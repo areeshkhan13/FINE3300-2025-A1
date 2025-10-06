@@ -1,25 +1,5 @@
-# mortgage.py
-# ---------------------------------------------
 # FINE3300 - Assignment 1, Part 1
-# Question: Mortgage Payments
-# ---------------------------------------------
-# Author: <Your Name>
-# GitHub Repo: https://github.com/<your-username>/FINE3300-2025-A1
-#
-# This program calculates the periodic mortgage payment
-# given:
-#  - Principal loan amount
-#  - Quoted nominal annual interest rate (compounded semi-annually)
-#  - Amortization period (in years)
-#
-# It computes payments for:
-#   - Monthly
-#   - Semi-monthly
-#   - Bi-weekly
-#   - Weekly
-#   - Rapid (accelerated) bi-weekly
-#   - Rapid (accelerated) weekly
-# ---------------------------------------------
+# Mortgage Payments
 
 from typing import Tuple
 
@@ -33,7 +13,6 @@ class MortgagePayment:
     """
 
     def __init__(self, quoted_rate_percent: float, amortization_years: int):
-        # Convert percent (e.g. 5.5%) to decimal
         self.r_nom = quoted_rate_percent / 100.0
         self.amort_years = amortization_years
 
